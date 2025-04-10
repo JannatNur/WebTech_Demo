@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 5px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        input, button {
+            width: 20%;
+            padding: 5px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .reset-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>User Registration Form</h2>
+    <form id="regForm">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" id="name" placeholder="Enter your name" required></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="number" id="age" placeholder="Enter your age" required></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" id="email" placeholder="Enter your email" required></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" id="password" placeholder="Password (8 chars, special)" required></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <label><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label><input type="radio" name="gender" value="Female" required> Female</label>
+                </td>
+            </tr>
+        </table>
+        <button type="button" class="submit-btn" onclick="validateForm()">Submit</button>
+        <button type="reset" class="reset-btn">Reset</button>
+        <p id="error-message" class="error"></p>
+    </form>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var errorMessage = document.getElementById("error-message");
+
+            // Reset error message
+            errorMessage.textContent = "";
+
+            // Simple check for missing fields
+            if (!name || !age || !email || !password || !gender) {
+                errorMessage.textContent = "All fields are required!";
+                return;
+            }
+
+            // Password validation: at least 8 characters and special character
+            if (password.length < 8 || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                errorMessage.textContent = "Password must be at least 8 characters long and include a special character!";
+                return;
+            }
+
+            alert("Form Submitted Successfully!");
+        }
+    </script>
+
+</body>
+</html>
